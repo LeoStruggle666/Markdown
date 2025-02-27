@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         body { font-family: Arial, sans-serif; padding: 20px; }
-        #output { border: 1px solid #ddd; padding: 10px; border-radius: 5px; background: #f9f9f9; }
+        #output { border: 1px solid #ddd; padding: 10px; border-radius: 5px; background: #f9f9f9; white-space: pre-line; }
     </style>
 </head>
 <body>
@@ -16,7 +16,8 @@
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             let mdText = urlParams.get('text') || '无内容';
-            document.getElementById("output").innerHTML = marked.parse(decodeURIComponent(mdText));
+            mdText = decodeURIComponent(mdText).replace(/\\n/g, '\n'); // 处理换行符
+            document.getElementById("output").innerHTML = marked.parse(mdText);
         };
     </script>
 </body>
